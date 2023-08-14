@@ -52,6 +52,7 @@ Route::get('/search', function (Request $request) {
 });
 
 
+//testing DB connection
 Route::get('/testdb', function () {
     return view('testdb');
 });
