@@ -29,9 +29,10 @@ Route::get('/', function () {
 });
 
 //Single listing
-Route::get('/listing/{id}', function ($id) {
+Route::get('/listing/{listing}', function (Listing $listing) {
+    //This is using Route Model Binding to verify if the id exists and run 404 error if it does not.
     return view('listing', [
-        'listing' => Listing::find($id)
+        'listing' => $listing
     ]);
 });
 
