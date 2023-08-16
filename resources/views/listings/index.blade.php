@@ -1,6 +1,5 @@
-@extends('layout')
+<x-layout>
 
-@section('content')
     @include('partials._hero')
     @include('partials._search')
     {{-- this came from the laragigs-theme html file --}}
@@ -16,4 +15,4 @@
         @endforeach
 
     </div>
-@endsection
+</x-layout>
