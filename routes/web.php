@@ -3,6 +3,7 @@
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,23 +20,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//All listings
-Route::get('/', function () {
-    return view('listings', [
-        //this data usually comes from a database.
-        'heading' => 'Latest Listings',
-        'listings' => Listing::all()
-    ]);
-});
+//All listings calling the controller
+Route::get('/', [ListingController::class, 'index']);
 
-//Single listing
-Route::get('/listing/{listing}', function (Listing $listing) {
-    //This is using Route Model Binding to verify if the id exists and run 404 error if it does not.
-    return view('listing', [
-        'listing' => $listing
-    ]);
-});
+//Single listing calling the controller 
+Route::get('/listing/{listing}', [ListingController::class, 'show']);
 
+
+
+//These are for testing purposes only
 Route::get('/test', function () {
     // echo 'This is my first route';
     return response('<h1>Welcome!</h1>', 200)
