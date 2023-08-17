@@ -17,7 +17,7 @@ class ListingController extends Controller
             //this data usually comes from a database.
             'heading' => 'Latest Listings',
             // 'listings' => Listing::all() 
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get() //this does the same as the all(), but sorted and filtered by the request array
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6) //this does the same as the all(), but sorted and filtered by the request array
         ]);
     }
 
