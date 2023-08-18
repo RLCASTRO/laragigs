@@ -38,6 +38,8 @@ Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
 //Update listing data
 Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
+//Delete listing data
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
 
 
 //These are for testing purposes only
