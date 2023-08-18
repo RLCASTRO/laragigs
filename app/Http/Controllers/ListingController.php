@@ -39,7 +39,7 @@ class ListingController extends Controller
         // dd($request->file('logo'));
         $formFields = $request->validate([
             'title' => 'required',
-            'company' => ['required'],
+            'company' => ['required', Rule::unique('listings', 'company')],
             'location' => 'required',
             'website' => 'required',
             'email' => ['required', 'email'],
@@ -54,6 +54,34 @@ class ListingController extends Controller
         Listing::create($formFields);
 
         return redirect('/')->with('message', 'Listing created successfully!');
+        
+    }
+
+    //show edit form
+    public function edit(Listing $listing) {
+        // dd($listing->all());
+        // dd($listing);
+        return view('listings.edit', ['listing' => $listing]);
+    }
+
+    public function update(Request $request, Listing $listing) {
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => ['required'],
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($request->hasFile('logo')) {    
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        $listing->update($formFields);
+
+        return back()->with('message', 'Listing updated successfully!');
         
     }
 }
