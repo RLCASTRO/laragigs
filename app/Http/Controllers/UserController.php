@@ -38,4 +38,16 @@ class UserController extends Controller
         // dd($formFields);
     }
 
+    public function logout(Request $request) {
+        //removes te session storage for the current user
+        auth()-> logout();
+
+        //recommended security  steps for securelly logs the user out
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('message', 'you have been logged out');
+
+    }
+
 }
