@@ -3,6 +3,7 @@
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 
 /*
@@ -40,6 +41,13 @@ Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
 //Delete listing data
 Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+
+//show register create form
+Route::get('/register', [UserController::class, 'create']);
+
+
+
+
 
 
 //These are for testing purposes only
