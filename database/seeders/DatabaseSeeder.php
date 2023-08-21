@@ -15,10 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
+        // User::factory(5)->create();
+        $user = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+        ]); //this will create a single user
 
         //to use this, you must have created a ListingFactory first.
-        Listing::factory(8)->create();
+        Listing::factory(8)->create([
+            'user_id' => $user->id
+        ]); //this will create the listings associated to the single user created before.
 
         
 
