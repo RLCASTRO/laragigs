@@ -1,57 +1,30 @@
+{{-- {{ dd($listings) }} --}}
 <x-layout>
     @include('partials._search')
+
 
 
     <x-card class="p-10 rounded">
         <header>
             <h1 class="text-3xl text-center font-bold my-6 uppercase">
-                Manage Gigs
+                Manage Your Gigs
             </h1>
         </header>
 
         <table class="w-full table-auto rounded-sm">
             <tbody>
-                <tr class="border-gray-300">
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="show.html">
-                            Laravel Senior Developer
-                        </a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="edit.html" class="text-blue-400 px-6 py-2 rounded-xl"><i
-                                class="fa-solid fa-pen-to-square"></i>
-                            Edit</a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <form action="">
-                            <button class="text-red-600">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                @unless ($listings->isEmpty())
+                    @foreach ($listings as $listing)
+                        <x-manageListing-card :listing="$listing" />
+                    @endforeach
+                @else
+                    <tr>
+                        <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                            No listings to show
+                        </td>
+                    </tr>
+                @endunless
 
-                <tr class="border-gray-300">
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="show.html">
-                            Junior Developer Opening
-                        </a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="edit.html" class="text-blue-400 px-6 py-2 rounded-xl"><i
-                                class="fa-solid fa-pen-to-square"></i>
-                            Edit</a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <form action="">
-                            <button class="text-red-600">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </x-card>

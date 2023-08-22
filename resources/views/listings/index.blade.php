@@ -10,7 +10,7 @@
             <h3> No listings found</h3>
         @endif
         @foreach ($listings as $listing)
-            {{-- this is passing the $listing props to the listing-card blade --}}
+            {{-- this is passing the $listing props to the manageListing-card blade --}}
             <x-listing-card :listing="$listing" />
         @endforeach
 

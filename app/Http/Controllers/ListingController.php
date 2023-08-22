@@ -30,12 +30,14 @@ class ListingController extends Controller
     }
 
     //display the create listings form
-    public function create() {
+    public function create()
+    {
         return view('listings.create');
     }
 
     //store listing data
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // dd($request->file('logo'));
         $formFields = $request->validate([
             'title' => 'required',
@@ -47,7 +49,7 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
-        if ($request->hasFile('logo')) {    
+        if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
@@ -56,17 +58,18 @@ class ListingController extends Controller
         Listing::create($formFields);
 
         return redirect('/')->with('message', 'Listing created successfully!');
-        
     }
 
     //show edit form
-    public function edit(Listing $listing) {
+    public function edit(Listing $listing)
+    {
         // dd($listing->all());
         // dd($listing);
         return view('listings.edit', ['listing' => $listing]);
     }
 
-    public function update(Request $request, Listing $listing) {
+    public function update(Request $request, Listing $listing)
+    {
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -77,26 +80,24 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
-        if ($request->hasFile('logo')) {    
+        if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
         $listing->update($formFields);
 
         return back()->with('message', 'Listing updated successfully!');
-        
     }
 
     //Delete Listing
-    public function destroy(Listing $listing) {
+    public function destroy(Listing $listing)
+    {
         $listing->delete();
         return redirect('/')->with('message', 'Listing deleted successfully!');
     }
 
     //Display Manage Listings page
     public function manage() {
-        return view('listings.manage');
+        return view('listings.manage', ['listings' => request()->user()->listings()->get()]);
     }
 }
-
-
