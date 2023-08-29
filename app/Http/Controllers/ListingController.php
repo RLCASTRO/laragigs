@@ -46,7 +46,8 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate logo as an image
         ]);
 
         if ($request->hasFile('logo')) {
@@ -83,7 +84,8 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate logo as an image
         ]);
 
         if ($request->hasFile('logo')) {
@@ -108,7 +110,8 @@ class ListingController extends Controller
     }
 
     //Display Manage Listings page
-    public function manage() {
+    public function manage()
+    {
         return view('listings.manage', ['listings' => request()->user()->listings()->get()]);
     }
 }
